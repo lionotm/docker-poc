@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true lionotm/docker-poc npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'ap-southeast-1'
+  app: 'docker-poc'
+  env: 'Dockerpoc-env'
+  bucket_name: 'elasticbeanstalk-ap-southeast-1-161616987243'
+  bucket_path: 'docker-poc'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
